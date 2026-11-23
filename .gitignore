@@ -7,3 +7,5 @@ sidra-resturant-bot/Lib/
 sidra-resturant-bot/Scripts/
 sidra-resturant-bot/Include/
 sidra-resturant-bot/pyvenv.cfg
+.venv/
+chroma_db/
