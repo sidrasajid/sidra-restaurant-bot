@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "category": "menu",
+        "question": "What type of cuisine does The Gourmet Table serve?",
+        "answer": "The Gourmet Table offers seasonal fine dining, featuring a carefully curated menu prepared with fresh, seasonal ingredients."
+    },
+    {
+        "id": 2,
+        "category": "menu",
+        "question": "Do you offer vegetarian food?",
+        "answer": "Yes, The Gourmet Table offers a selection of vegetarian dishes."
+    },
+    {
+        "id": 3,
+        "category": "menu",
+        "question": "Do you have vegan options?",
+        "answer": "Yes, we offer selected vegan dishes. Please inform our staff about your dietary preferences when ordering."
+    },
+    {
+        "id": 4,
+        "category": "menu",
+        "question": "Do you offer gluten-free dishes?",
+        "answer": "Yes, we have selected gluten-free options. Please inform our staff about your dietary requirements before ordering."
+    },
+    {
+        "id": 5,
+        "category": "allergens",
+        "question": "Can I ask about food allergens in a dish?",
+        "answer": "Yes, our staff can help you identify potential allergens in menu items. Please inform them about your allergies before placing an order."
+    },
+    {
+        "id": 6,
+        "category": "allergens",
+        "question": "Do your dishes contain nuts?",
+        "answer": "Some dishes may contain nuts or nut-based ingredients. Please consult our restaurant staff before ordering if you have a nut allergy."
+    },
+    {
+        "id": 7,
+        "category": "allergens",
+        "question": "Can you accommodate guests with dairy allergies?",
+        "answer": "Please inform our staff about your dairy allergy. They can help identify suitable menu options and confirm ingredient information."
+    },
+    {
+        "id": 8,
+        "category": "allergens",
+        "question": "Can you guarantee that food is completely free from cross-contamination?",
+        "answer": "Please discuss your allergy requirements with our staff before ordering. We cannot guarantee that every dish is completely free from cross-contamination."
+    },
+    {
+        "id": 9,
+        "category": "hours",
+        "question": "What are your opening hours on weekdays?",
+        "answer": "The Gourmet Table is open Monday through Friday from 11:30 AM to 10:00 PM."
+    },
+    {
+        "id": 10,
+        "category": "hours",
+        "question": "What are your opening hours on weekends?",
+        "answer": "The Gourmet Table is open Saturday and Sunday from 11:00 AM to 11:00 PM."
+    },
+    {
+        "id": 11,
+        "category": "hours",
+        "question": "Are you open on Sundays?",
+        "answer": "Yes, The Gourmet Table is open on Sundays from 11:00 AM to 11:00 PM."
+    },
+    {
+        "id": 12,
+        "category": "catering",
+        "question": "Do you provide catering services?",
+        "answer": "Please contact The Gourmet Table directly to discuss catering availability and arrangements for your event."
+    },
+    {
+        "id": 13,
+        "category": "catering",
+        "question": "Can I arrange catering for a private event?",
+        "answer": "You can contact our restaurant to discuss private event catering requirements and available arrangements."
+    },
+    {
+        "id": 14,
+        "category": "catering",
+        "question": "Can you customize a catering menu?",
+        "answer": "Please discuss your preferred menu, dietary requirements, and event details with our restaurant team to explore customization options."
+    },
+    {
+        "id": 15,
+        "category": "catering",
+        "question": "How can I get a catering quotation?",
+        "answer": "Contact The Gourmet Table with your event date, expected number of guests, and catering requirements to request a quotation."
+    }
+]

@@ -8,6 +8,29 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from openai import OpenAI
 from google import genai
 from google.genai import types
+# Day 4: RAG FAQ Search
+from faq_search import search_faq
+
+# Gemini-compatible FAQ search wrapper
+def gemini_search_faq(question: str) -> str:
+    """Search restaurant FAQs and return answers as plain text."""
+
+    results = search_faq(question)
+
+    if not results:
+        return "No relevant FAQ information was found."
+
+    formatted_results = []
+
+    for item in results:
+        formatted_results.append(
+            f"Question: {item['question']}\n"
+            f"Answer: {item['answer']}\n"
+            f"Category: {item['category']}"
+        )
+
+    return "\n\n".join(formatted_results)
+
 
 load_dotenv()
 
@@ -57,8 +80,10 @@ def check_table(date: str, guests: int) -> dict:
     }
 
 TOOL_REGISTRY = {
-    "check_table": check_table
+    "check_table": check_table,
+    "search_faq": search_faq
 }
+
 
 OPENAI_TOOLS = [
     {
@@ -81,8 +106,26 @@ OPENAI_TOOLS = [
                 "required": ["date", "guests"]
             }
         }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "search_faq",
+            "description": "Search the restaurant FAQ knowledge base for accurate information about opening hours, menu, cuisine, dietary options, allergens, and restaurant policies. Use this tool when a customer asks a general restaurant information question.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "question": {
+                        "type": "string",
+                        "description": "The customer's question about the restaurant."
+                    }
+                },
+                "required": ["question"]
+            }
+        }
     }
 ]
+
 
 SYSTEM_PERSONA = (
     "You are an elegant, warm, and attentive Restaurant Concierge Bot for 'The Gourmet Table'.\n\n"
@@ -91,10 +134,11 @@ SYSTEM_PERSONA = (
     "- Operating Hours (Weekends): Saturday and Sunday, 11:00 AM to 11:00 PM\n"
     "- Cuisine & Dietary: Seasonal fine dining with vegan, vegetarian, and gluten-free options.\n\n"
     "Guidelines:\n"
-    "1. Inquiries: Answer inquiries accurately regarding hours, menu offerings, and allergens.\n"
-    "2. Reservations: When a user asks about table availability or booking, invoke the `check_table(date, guests)` tool.\n"
-    "   - Always state all times cleanly in 12-hour format with AM/PM.\n"
-    "3. Politeness: Keep replies courteous, refined, and concise."
+"1. Restaurant Information: When customers ask about opening hours, menu, cuisine, dietary options, allergens, or restaurant policies, use the `search_faq(question)` tool to retrieve accurate information from the restaurant FAQ knowledge base.\n"
+"2. FAQ Accuracy: Base your answers on the information returned by `search_faq`. If the FAQ does not contain the answer, politely tell the customer that you do not have that information available. Never invent restaurant policies or menu details.\n"
+"3. Reservations: When a user asks about table availability or booking, invoke the `check_table(date, guests)` tool.\n"
+"4. Time Format: Always state times cleanly in 12-hour format with AM/PM.\n"
+"5. Politeness: Keep replies courteous, refined, and concise."
 )
 
 # ----------------------------------------------------
@@ -118,7 +162,7 @@ async def websocket_chat(websocket: WebSocket, provider: str = "gemini"):
                 model="gemini-3.5-flash-lite",
                 config=types.GenerateContentConfig(
                     system_instruction=SYSTEM_PERSONA,
-                    tools=[check_table],
+                    tools=[check_table, gemini_search_faq],
                     temperature=0.2,
                 )
             )
