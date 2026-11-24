@@ -130,7 +130,7 @@
         const protocol = location.protocol === "https:" ? "wss:" : "ws:";
 
         socket = new WebSocket(
-            `${protocol}//127.0.0.1:8000/ws/chat?provider=openai`
+            `${protocol}//127.0.0.1:8000/ws/chat?provider=gemini`
         );
 
         socket.onopen = function() {
